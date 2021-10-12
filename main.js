@@ -1,40 +1,23 @@
-  // fetch('https://api.imgur.com/3/gallery/top/week/1?&album_previews=true', {
-  //   headers: {
-  //     Authorization: `Client-ID f9068c305c00fae`
-  //   }
-  // })
-  // .then(res=>{
-  //    return res.json()
-  // })
-  // .then(res=>{
-  //     console.log(res);
-  //     localStorage.setItem("data",JSON.stringify(res.data))
-  // })
-  // var interval = setInterval(function(){
-  //   var countForVideo = document.querySelector("video").readyState;
-  //   console.log(countForVideo);
-  //   if(countForVideo == 4){
-  //     document.querySelector('vedio').play();
-  //     clearInterval(interval);
-  //   }
-  // },3000);
 
-  // async function get(y){
-  //   try{
-  //     var target = y
-  //       let res = await fetch(`https://api.unsplash.com/search/photos?page=1&per_page=30&query=${target}&client_id=bKDk_VSMm4fMj-YsQmoPazBTryakSnWLj6NL88hTkH4`)
-  //       let x  = await res.json()
-  //       console.log(x);
-  //     localStorage.setItem("data",JSON.stringify(x.results))
+let data=[]
+let page = 1
+  async function get(page){
+    try{
       
-  //   }
-  //   finally{
+        let res = await fetch(`https://api.unsplash.com/search/photos?page=${page}&per_page=30&query=L&client_id=bKDk_VSMm4fMj-YsQmoPazBTryakSnWLj6NL88hTkH4`)
+        let x  = await res.json()
+        console.log(x);
+        
+        data = [...data,...x.results]
+        data.shift()
+        data.shift()
+        append()
+    }
+    finally{
 
-  //     }
-  // }
-  let data =  JSON.parse(localStorage.getItem("data"))
-  
-console.log(data);
+      }
+  }
+  get(page)
   function append(){
 
      data.forEach(element => {
@@ -61,7 +44,9 @@ console.log(data);
 
   window.addEventListener('scroll',function(){
     var footer = document.querySelector(".footer");
+    var cards = document.querySelector(".cards");
     footer.classList.toggle('sticky',window.scrollY)
+    cards.classList.toggle('drop',window.scrollY)
     })
 
     const handleScroll = () => {
@@ -81,9 +66,78 @@ console.log(data);
       const windowBottom = windowheight + window.pageYOffset;
       if (windowBottom >= docHeight) {
         
-        data=[...data,...data]
-        append()
+        page += 1
+
+        get(page)
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+
+
+
+    var isFetching = false;
+var query = "";
+
+function handleSearch() {
+    document.querySelector('.search-result').setAttribute('style', "display: inline");
+    query = document.querySelector('#query').value;
+    if (isFetching) {
+        return;
+    }
+    else {
+        isFetching = true;
+    }
+
+    setTimeout(() => {
+        isFetching = false;
+
+        fetch(`https://webit-keyword-search.p.rapidapi.com/autosuggest?q=${query}&language=en`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "webit-keyword-search.p.rapidapi.com",
+                "x-rapidapi-key": "ff657517bcmsh092c91dfc8e6c66p100dedjsneabffd262afd"
+            }
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then(res => {
+                let data = res.data.results;
+                document.querySelector('.searchBox').innerHTML = null;
+                data.forEach((el) => {
+                    if (el != null) {
+                        let li = document.createElement('li');
+                        li.innerHTML = `${el}`;
+                        li.setAttribute('onclick', `handleInputVal('${el}')`)
+                        document.querySelector('.searchBox').append(li);
+                    }
+                })
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }, 300)
+}
+
+function handleInputVal(val) {
+    let inputBox = document.querySelector('#query');
+    inputBox.value = val;
+    document.querySelector('.search-result').setAttribute('style', "display: none");
+    fetchQueryData(val);
+}
+
+function fetchQueryData(query) {
+console.log(query);
+    fetch(`https://api.unsplash.com/search/photos?page=1&per_page=30&query=${query}&client_id=bKDk_VSMm4fMj-YsQmoPazBTryakSnWLj6NL88hTkH4`)
+        .then((res) => {
+            return res.json();
+        }).then((res) => {
+            let x = res.results;
+            console.log(x);
+            data =[...x]
+            append()
+        }).catch((err) => {
+            console.log(err);
+        })
+}
