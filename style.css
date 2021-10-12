@@ -1,0 +1,124 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper{
+  width: 100%;
+  background-color: rgb(46,48,53);
+}
+.cards{
+    width: 1000px;
+    /* overflow-x: hidden; */
+    margin: auto;
+    columns: 4;
+    column-gap: 25px;
+    
+}
+
+.card{
+    /* margin-top: 10px; */
+    margin-bottom: 13px;
+    /* margin-right: 10px; */
+    position: relative;
+    width: 240px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.overlay{
+    
+    position:absolute;
+    background-color: transparent;
+    width: 240px;
+    top: 0;
+    bottom: 0;
+}
+.overlay:hover{
+    visibility: visible;
+    background-color: rgba(255, 255, 255, .2);
+}
+.vedio{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 0;
+    min-height: 200px;
+}
+.vedio img{
+    border-radius: 5px 5px 0px 0;
+    width: 100%;
+    min-height: 200px;
+}
+.details{
+    border-radius: 0 0 5px 5px;
+
+    padding-top: 1px;
+    padding-bottom: 10px;
+    width: 100%;
+    background-color: rgb(71,74,81);
+}
+.details h3{
+    margin-left: 10px;
+    font-size: 14px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.analytica{
+    margin-left: 10px;
+    color: gray;
+    display: flex;
+    /* justify-content: space-around; */
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+.analytica span{
+    margin-right: 40px;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(51,53,59);
+    transform: translateY(0%);
+    transition: 300ms ease-in-out;
+}
+.cont{
+    list-style: none;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    margin: 0;
+    /* width: 1250px; */
+    /* margin: auto; */
+}
+.cont li{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(164,169,178);
+    margin-left: 20px;
+    padding:  15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.cont li:first-of-type{
+    font-weight: 600;
+}
+.cont li:nth-child(12){
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+}
+.cont li:last-of-type{
+    width: 130px;
+    line-height: 27px;
+    background-color: rgb(71,74,81);
+}
+.sticky{
+    transform: translateY(100%);
+    transition: 300ms ease-in-out;
+}
+.sort{
+    height: 100px;
+}
