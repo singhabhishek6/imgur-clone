@@ -58,7 +58,7 @@
                 </svg>
                 <a href="#sign_up">Go Ad-Free</a>
                 <a href="#sign_in" id="sign_in">Sign in</a>
-                <a href="#sign_up">Sign up</a>
+                <a href="#sign_up" onclick="handleInputVal()">Sign up</a>
             </div>
         </nav>
 
@@ -69,18 +69,17 @@
                 <h4>EXPLORE TAGS</h4>
                 <h4>MORE TAGS +</h4>
             </div>
-            <div class="tags-cards">
-                <div class="first-card">
-                    <img src="https://i.imgur.com/e9C2F3w_d.jpg?maxwidth=800&shape=thumb&fidelity=high" width="300" height="150" alt="">
-
-                </div>
-            </div>
         </div>
     </div>
 
     <div class="search-bar">
         <input type="text" onkeyup="handleSearch()" onkeydown="handleSearch()" placeholder="images, #tags, @users oh my!" id="query">
         <img onclick="handleSearch()" src="https://s.imgur.com/desktop-assets/desktop-assets/icon-search.8d0f9b564a4659d48d8eca38b968a7f2.svg" alt="">
+
+        <div class="search-result" style="display: none;">
+            <ul class="searchBox">
+            </ul>
+        </div>
     </div>
 </body>
 

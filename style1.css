@@ -113,3 +113,35 @@ nav {
     top: 9px;
     cursor: pointer;
 }
+
+.search-result {
+    background: #515073;
+    width: 546px;
+    border-radius: 3px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    z-index: 5;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.search-result > ul {
+    padding: 0px 10px;
+}
+
+.search-result > ul > li {
+    list-style-type: none;
+    height: 35px;
+    cursor: pointer;
+    margin: 5px 0px;
+    padding: 0px 15px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-family: Proxima Nova Regular,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.search-result > ul > li:hover {
+    background: hsla(0,0%,80%,.29);
+}
